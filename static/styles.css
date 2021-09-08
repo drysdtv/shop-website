@@ -15,14 +15,14 @@ section {
   --Lobster: "lobster", cursive;
   --light-black: #2e2c2caf;
   --background-image: url("/static/banner.png");
-  --background-color: #;
+  --background-color: linear-gradient(360deg, rgba(0,182,255,1) 0%, rgba(238,0,255,1) 100%);;
   --light-gray: rgba(255, 255, 255, 0.877);
 }
 
 header a {
   font-family: var(--Rubik);
   font-size: 0.9em;
-  color: black;
+  color: white;
 }
 
 .dropdown-content {
@@ -42,7 +42,7 @@ header a {
 }
 
 .dropdown-content a:hover {
-  background-color: rgba(184, 39, 58);
+  background-color: rgba(170, 170, 170);
 }
 
 .dropdown:hover .dropdown-content {
@@ -62,7 +62,7 @@ header .navbar-brand {
 }
 
 header .nav-link:hover {
-  color: rgba(184, 39, 58)
+  color: rgba(30, 30, 30)
 }
 
 header .row .col-md-7 {
@@ -81,7 +81,7 @@ header .row .col-md-5 img {
 header {
   background: #ff512f;
   /* fallback for old browsers */
-  background: var(--background-image);
+  background: var(--background-color);
 }
 
 header .container .col-md-7 {
