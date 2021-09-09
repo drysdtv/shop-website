@@ -15,7 +15,7 @@ section {
   --Lobster: "lobster", cursive;
   --light-black: #2e2c2caf;
   --background-image: url("/static/banner.png");
-  --background-color: linear-gradient(360deg, rgba(0,182,255,1) 0%, rgba(238,0,255,1) 100%);;
+  --background-color: linear-gradient(360deg, rgba(0,182,255,1) 0%, rgba(238,0,255,1) 100%);
   --light-gray: rgba(255, 255, 255, 0.877);
 }
 
@@ -62,7 +62,7 @@ header .navbar-brand {
 }
 
 header .nav-link:hover {
-  color: rgba(30, 30, 30)
+  color: rgba(30, 30, 30);
 }
 
 header .row .col-md-7 {
@@ -108,3 +108,27 @@ header .container .col-md-7 p {
   font-weight: bold;
 }
 
+.primary-img {
+    position: relative
+    position: top:20px
+}
+
+.cards {
+padding: 10px
+}
+
+.cards card {
+width:22rem;
+padding: 10px;
+}
+
+.card-buy a {
+  border-radius: 30px;
+  font-weight: light;
+  text-align: center;
+  float: center;
+}
+
+.buy-btn:hover {
+    color: rgba(170, 170, 170);
+}
