@@ -112,6 +112,19 @@ header .container .col-md-7 p {
     position: relative
     position: top:20px
 }
+.product-title {
+padding-top: 50px;
+text-align: center;
+
+}
+
+.main-product {
+z-index: 10;
+border-radius: 10px;
+}
+.product {
+padding-top: 50px;
+}
 
 .cards {
 padding: 10px
@@ -130,5 +143,5 @@ padding: 10px;
 }
 
 .buy-btn:hover {
-    color: rgba(170, 170, 170);
+    color: rgba(170, 170, 145);
 }
