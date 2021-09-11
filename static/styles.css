@@ -66,8 +66,8 @@ header .nav-link:hover {
 }
 
 header .row .col-md-7 {
-  padding: 22vmin 1vmin;
-  padding-bottom: 35vmin;
+  padding: 15vmin 1vmin;
+  padding-bottom: 15vmin;
 }
 
 header .row .col-md-5 {
@@ -144,4 +144,8 @@ padding: 10px;
 
 .buy-btn:hover {
     color: rgba(170, 170, 145);
+}
+
+.card-image {
+    position: relative;
 }
