@@ -146,6 +146,20 @@ padding: 10px;
     color: rgba(170, 170, 145);
 }
 
+.clearfix {
+overflow: auto;
+margin-right: 1px;
+}
+
 .card-image {
     position: relative;
+}
+
+.set-right {
+float:right;
+text-align:right;
+}
+
+.brand-navbar {
+  padding-left: 8rem;
 }
