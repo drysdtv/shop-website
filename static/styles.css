@@ -135,7 +135,14 @@ width:22rem;
 padding: 10px;
 }
 
-.card-buy a {
+.card-buy a{
+  border-radius: 30px;
+  font-weight: light;
+  text-align: center;
+  float: center;
+}
+
+.card-buy button{
   border-radius: 30px;
   font-weight: light;
   text-align: center;
@@ -162,4 +169,8 @@ text-align:right;
 
 .brand-navbar {
   padding-left: 8rem;
+}
+
+.button {
+  border-radius: 30px;
 }
