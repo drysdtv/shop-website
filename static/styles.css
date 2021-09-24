@@ -16,7 +16,7 @@ section {
   --light-black: #2e2c2caf;
   --background-image: url("/static/banner.png");
   --background-color: linear-gradient(360deg, rgba(0,182,255,1) 0%, rgba(238,0,255,1) 100%);
-  --light-gray: rgba(255, 255, 255, 0.877);
+  --light-gray: rgba(240, 240, 240, 0.877);
 }
 
 header a {
@@ -67,7 +67,7 @@ header .nav-link:hover {
 
 header .row .col-md-7 {
   padding: 15vmin 1vmin;
-  padding-bottom: 15vmin;
+  padding-bottom: 23vmin;
 }
 
 header .row .col-md-5 {
@@ -109,8 +109,8 @@ header .container .col-md-7 p {
 }
 
 .primary-img {
-    position: relative
-    position: top:20px
+
+    padding-top: 10vmin;
 }
 .product-title {
 padding-top: 50px;
@@ -128,11 +128,21 @@ padding-top: 50px;
 
 .cards {
 padding: 10px
+
 }
 
 .cards card {
 width:22rem;
 padding: 10px;
+
+}
+
+
+.card:hover{
+     transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+   transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+
 }
 
 .card-buy a{
@@ -173,4 +183,8 @@ text-align:right;
 
 .button {
   border-radius: 30px;
+}
+
+.product-page {
+ background-color: var(--light-gray);
 }
