@@ -16,7 +16,7 @@ section {
   --light-black: #2e2c2caf;
   --background-image: url("/static/banner.png");
   --background-color: linear-gradient(360deg, rgba(0,182,255,1) 0%, rgba(238,0,255,1) 100%);
-  --light-gray: rgba(240, 240, 240, 0.877);
+  --light-gray: rgba(245, 245, 245 , 0.877);
 }
 
 header a {
@@ -138,7 +138,7 @@ padding: 10px;
 }
 
 
-.card:hover{
+.cards .card:hover{
      transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
@@ -187,4 +187,18 @@ text-align:right;
 
 .product-page {
  background-color: var(--light-gray);
+}
+
+.customer {
+ background-color: (255, 255, 255);
+}
+
+.customer .col-md-7 {
+  padding-left: 50vmin ;
+  padding-bottom: 10vmin;
+  padding-top: 10vmin;
+}
+
+.customer .card {
+
 }
