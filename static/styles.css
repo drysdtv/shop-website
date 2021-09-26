@@ -137,6 +137,10 @@ padding: 10px;
 
 }
 
+.cards-cart {
+padding-left:10vmin;
+padding-right:10vmin;
+}
 
 .card:hover{
      transform: scale(1.05);
@@ -187,4 +191,8 @@ text-align:right;
 
 .product-page {
  background-color: var(--light-gray);
+}
+
+.nav-padding{
+padding-bottom:1.5vmin;
 }
