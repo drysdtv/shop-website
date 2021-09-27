@@ -109,9 +109,9 @@ header .container .col-md-7 p {
 }
 
 .primary-img {
-
     padding-top: 10vmin;
 }
+
 .product-title {
 padding-top: 50px;
 text-align: center;
@@ -122,6 +122,7 @@ text-align: center;
 z-index: 10;
 border-radius: 10px;
 }
+
 .product {
 padding-top: 50px;
 }
@@ -200,5 +201,21 @@ text-align:right;
 }
 
 .customer .card {
+
+}
+
+.card-price .cart-price {
+float:left;
+padding-top: 5vmin;
+padding-right: 3vmin;
+}
+
+.cart-clear {
+padding-top: 50%;
+padding-bottom: 50%;
+float:right
+}
+
+.cards-cart {
 
 }
