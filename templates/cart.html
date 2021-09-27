@@ -11,16 +11,40 @@
   <link rel="stylesheet" href="static/styles.css" />
   <link rel="stylesheet" href="static/mobile-style.css">
 
+<style>
+
+    </style>
 </head>
 <body>
 
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-10">
+        <div class="nav-padding">
       <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="/">
          <i class="fab fa-wolf-pack-battalion"></i>Watches</a>
       </nav>
     </div>
+    </div>
     {% if x1 %}
+  <div class="cards-cart">
+  <div style="width:100%" class="container-fluid shadow-sm p-3 mb-5 bg-black rounded">
+      <div class="row">
+          <div class="col-md-2">
+          <img src="../static/watch example.png" style="width:100%;"/>
+          </div>
+            <div class="col-md-6">
+      <div class="title">
+              <h2 class="card-title text-align:center">Watch1</h2>
+        </div>
+      <div class="card-text">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, tenetur.</p>
+      </div>
+            </div>
+          <div class="col-md-1">
+      <div class="card-price px-1">
+        <h4>$599</h4>
+      </div>
+          </div>
   <form action="/cart" method="POST" class="card-buy">
     <div class="card-buy">
         <button class="btn btn-primary" type="submit" name="watch1" value="watch1">
@@ -28,8 +52,32 @@
         </button>
     </div>
   </form>
+      </div>
+          </div>
+  </div>
+  </div>
+  </div>
     {%endif%}
     {% if x2 %}
+      <div class="cards-cart">
+  <div class="container-fluid shadow-sm p-3 mb-5 bg-white rounded">
+      <div class="row">
+          <div class="col-md-2">
+          <img src="../static/watch example.png" style="width:100%;"/>
+          </div>
+            <div class="col-md-6">
+      <div class="title">
+              <h2 class="card-title text-align:center">Watch2</h2>
+        </div>
+      <div class="card-text">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, tenetur.</p>
+      </div>
+            </div>
+          <div class="col-md-1">
+      <div class="card-price px-1">
+        <h4>$599</h4>
+      </div>
+            </div>
   <form action="/cart" method="POST" class="card-buy">
     <div class="card-buy">
         <button class="btn btn-primary" type="submit" name="watch2" value="watch2">
@@ -37,8 +85,31 @@
         </button>
     </div>
   </form>
+  </div>
+  </div>
+  </div>
+  </div>
     {%endif%}
     {% if x3 %}
+                <div class="cards-cart">
+  <div style="width:100%" class="container-fluid shadow-sm p-3 mb-5 bg-white rounded">
+      <div class="row">
+          <div class="col-md-2">
+          <img src="../static/watch example.png" style="width:100%;"/>
+          </div>
+            <div class="col-md-6">
+      <div class="title">
+              <h2 class="card-title text-align:center">Watch3</h2>
+        </div>
+      <div class="card-text">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, tenetur.</p>
+      </div>
+            </div>
+          <div class="col-md-1">
+      <div class="card-price px-1">
+        <h4>$599</h4>
+      </div>
+          </div>
       <form action="/cart" method="POST" class="card-buy">
       <div class="card-buy">
         <button class="btn btn-primary" type="submit" name="watch3" value="watch3">
@@ -46,8 +117,31 @@
         </button>
       </div>
       </form>
+  </div>
+  </div>
+  </div>
+  </div>
     {%endif%}
     {% if x4 %}
+                <div class="cards-cart">
+  <div style="width:100%" class="container-fluid shadow-sm p-3 mb-5 bg-white rounded">
+      <div class="row">
+          <div class="col-md-2">
+          <img src="../static/watch example.png" style="width:100%;"/>
+          </div>
+            <div class="col-md-6">
+      <div class="title">
+              <h2 class="card-title text-align:center">Watch 4</h2>
+        </div>
+      <div class="card-text">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, tenetur.</p>
+      </div>
+            </div>
+          <div class="col-md-1">
+      <div class="card-price px-1">
+        <h4>$599</h4>
+      </div>
+          </div>
       <form action="/cart" method="POST" class="card-buy">
       <div class="card-buy">
         <button class="btn btn-primary" type="submit" name="watch4" value="watch4">
@@ -55,6 +149,10 @@
         </button>
       </div>
       </form>
+  </div>
+  </div>
+  </div>
+  </div>
     {%endif%}
 </section>
 
