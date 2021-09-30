@@ -7,7 +7,7 @@ quantity1 = 0
 quantity2 = 0
 quantity3 = 0
 quantity4 = 0
-p = True
+
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
@@ -56,38 +56,28 @@ def cart():
     if request.form.get('watch1'):
         quantity1 = 0
         item = request.form.get('watch1')
-        res = make_response(render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4))
+        res = make_response(render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, quantity4=quantity4))
         res.set_cookie(item, str(quantity1), max_age=0)
         return res
     if request.form.get('watch2'):
         quantity2 = 0
         item = request.form.get('watch2')
-        res = make_response(render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4))
+        res = make_response(render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4,quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, quantity4=quantity4))
         res.set_cookie(item, str(quantity2), max_age=0)
         return res
     if request.form.get('watch3'):
         quantity3 = 0
         item = request.form.get('watch3')
-        res = make_response(render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4))
+        res = make_response(render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4,quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, quantity4=quantity4))
         res.set_cookie(item, str(quantity3), max_age=0)
         return res
     if request.form.get('watch4'):
         quantity4 = 0
         item = request.form.get('watch4')
-        res = make_response(render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4))
+        res = make_response(render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4,quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, quantity4=quantity4))
         res.set_cookie(item, str(quantity4), max_age=0)
         return res
-    return render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4)
-
-
-@app.route('/cookie/')
-def cookie():
-    if not request.cookies.get('cart'):
-        res = make_response("Setting a cookie")
-        res.set_cookie('cart', 'watch1')
-    else:
-        res = make_response("Value of cookie foo is {}".format(request.cookies.get('cart')))
-    return res, render_template('cookie.html')
+    return render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4,quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, quantity4=quantity4)
 
 
 app.run(host='0.0.0.0', port=5000, debug=True)
