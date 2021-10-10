@@ -28,12 +28,12 @@
     <div class="cart-page">
     {% if x1 %}
 <div class="cards-cart">
-<div style="width:100%" class="container-cart shadow-sm p-3 mb-5 bg-white rounded">
-  <div class="row">
-      <div class="col-md-2">
+  <div class="container-fluid shadow-sm p-3 mb-5 bg-white rounded">
+      <div class="row">
+          <div class="col-md-2">
           <img src="../static/watch example.png" style="width:100%;"/>
-      </div>
-      <div class="col-md-5">
+          </div>
+            <div class="col-md-5">
       <div class="title">
               <h2 class="card-title text-align:center">Watch 1</h2>
         </div>
@@ -42,15 +42,15 @@
       </div>
             </div>
           <div class="col-md-1 top-bot">
-          <form method="POST" action="/cart">
+              <form method="POST" action="/cart">
           <input class="form-control" type="number" name="q1" min="1" placeholder="{{quantity1}}">
-          </form>
-                  </div>
+              </form>
+          </div>
           <div class="col-md-1 top-bot">
       <div class="card-price px-1">
         <h4>${{quantity1*599}}</h4>
       </div>
-          </div>
+            </div>
   <form action="/cart" method="POST" class="card-buy">
     <div class="card-buy top-bot">
         <button class="btn btn-primary" type="submit" name="watch1" value="watch1">
@@ -59,8 +59,8 @@
     </div>
   </form>
   </div>
-</div>
-</div>
+  </div>
+  </div>
     {%endif%}
     {% if x2 %}
       <div class="cards-cart">
@@ -175,6 +175,7 @@
         {%if x1 or x2 or x3 or x4%}
         {{quantity1*599 + quantity2*599 + quantity3*599 + quantity4*599}}
         {%endif%}
+        <hr>
 </div>
 </body>
 </html>
