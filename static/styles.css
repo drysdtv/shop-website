@@ -138,8 +138,8 @@ padding: 10px;
 }
 
 .cards-cart {
-padding-left:10vmin;
-padding-right:10vmin;
+padding-left:5vmin;
+padding-right:5vmin;
 }
 
 .card:hover{
@@ -195,6 +195,7 @@ text-align:right;
 .cart-page {
 padding-top:5px;
  background-color: var(--light-gray);
+ width:75%;
 }
 
 .nav-padding{
@@ -203,3 +204,13 @@ padding-bottom:1.5vmin;
 br{
 padding-top:5px;
 }
+
+.container-cart{
+max-width:auto;
+height:170px;
+}
+
+.top-bot{
+padding-top:40px;
+}
+

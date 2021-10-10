@@ -27,38 +27,40 @@
     </div>
     <div class="cart-page">
     {% if x1 %}
-  <div class="cards-cart">
-  <div style="width:100%" class="container-fluid shadow-sm p-3 mb-5 bg-white rounded">
-      <div class="row">
-          <div class="col-md-2">
+<div class="cards-cart">
+<div style="width:100%" class="container-cart shadow-sm p-3 mb-5 bg-white rounded">
+  <div class="row">
+      <div class="col-md-2">
           <img src="../static/watch example.png" style="width:100%;"/>
-          </div>
-            <div class="col-md-5">
+      </div>
+      <div class="col-md-5">
       <div class="title">
-              <h2 class="card-title text-align:center">Watch1</h2>
+              <h2 class="card-title text-align:center">Watch 1</h2>
         </div>
       <div class="card-text">
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, tenetur.</p>
       </div>
             </div>
-          <div class="col-md-1">
-              {{quantity1}}
-          </div>
-          <div class="col-md-1">
+          <div class="col-md-1 top-bot">
+          <form method="POST" action="/cart">
+          <input class="form-control" type="number" name="q1" min="1" placeholder="{{quantity1}}">
+          </form>
+                  </div>
+          <div class="col-md-1 top-bot">
       <div class="card-price px-1">
-        <h4>$599</h4>
+        <h4>${{quantity1*599}}</h4>
       </div>
           </div>
   <form action="/cart" method="POST" class="card-buy">
-    <div class="card-buy">
+    <div class="card-buy top-bot">
         <button class="btn btn-primary" type="submit" name="watch1" value="watch1">
         Clear from cart
         </button>
     </div>
   </form>
-      </div>
-          </div>
   </div>
+</div>
+</div>
     {%endif%}
     {% if x2 %}
       <div class="cards-cart">
@@ -69,22 +71,24 @@
           </div>
             <div class="col-md-5">
       <div class="title">
-              <h2 class="card-title text-align:center">Watch2</h2>
+              <h2 class="card-title text-align:center">Watch 2</h2>
         </div>
       <div class="card-text">
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, tenetur.</p>
       </div>
             </div>
-          <div class="col-md-1">
-              {{quantity2}}
+          <div class="col-md-1 top-bot">
+              <form method="POST" action="/cart">
+          <input class="form-control" type="number" name="q2" min="1" placeholder="{{quantity2}}">
+              </form>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-1 top-bot">
       <div class="card-price px-1">
-        <h4>$599</h4>
+        <h4>${{quantity2*599}}</h4>
       </div>
             </div>
   <form action="/cart" method="POST" class="card-buy">
-    <div class="card-buy">
+    <div class="card-buy top-bot">
         <button class="btn btn-primary" type="submit" name="watch2" value="watch2">
         Clear from cart
         </button>
@@ -103,22 +107,24 @@
           </div>
             <div class="col-md-5">
       <div class="title">
-              <h2 class="card-title text-align:center">Watch3</h2>
+              <h2 class="card-title text-align:center">Watch 3</h2>
         </div>
       <div class="card-text">
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, tenetur.</p>
       </div>
             </div>
-          <div class="col-md-1">
-              {{quantity3}}
+          <div class="col-md-1 top-bot">
+              <form method="POST" action="/cart">
+          <input class="form-control" type="number" name="q3" value="q3" min="1" placeholder="{{quantity3}}">
+              </form>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-1 top-bot">
       <div class="card-price px-1">
-        <h4>$599</h4>
+        <h4>${{quantity3*599}}</h4>
       </div>
           </div>
       <form action="/cart" method="POST" class="card-buy">
-      <div class="card-buy">
+      <div class="card-buy top-bot">
         <button class="btn btn-primary" type="submit" name="watch3" value="watch3">
         Clear from cart
         </button>
@@ -143,16 +149,18 @@
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, tenetur.</p>
       </div>
             </div>
-          <div class="col-md-1">
-              {{quantity4}}
+          <div class="col-md-1 top-bot">
+              <form method="POST" action="/cart">
+          <input class="form-control" type="number" name="q4" min="1" placeholder="{{quantity4}}">
+              </form>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-1 top-bot">
       <div class="card-price px-1">
-        <h4>$599</h4>
+        <h4>${{quantity4*599}}</h4>
       </div>
           </div>
       <form action="/cart" method="POST" class="card-buy">
-      <div class="card-buy">
+      <div class="card-buy top-bot">
         <button class="btn btn-primary" type="submit" name="watch4" value="watch4">
         Clear from cart
         </button>
@@ -164,6 +172,9 @@
     {%endif%}
 </section>
 
+        {%if x1 or x2 or x3 or x4%}
+        {{quantity1*599 + quantity2*599 + quantity3*599 + quantity4*599}}
+        {%endif%}
 </div>
 </body>
 </html>
