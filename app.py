@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, make_response
 import sqlite3 as sql
+from wtforms import StringField, PasswordField, BooleanField
+from wtforms.validators import InputRequired, Email, Length
+from flask_wtf import FlaskForm
 
 app = Flask('app')
 
@@ -7,6 +10,12 @@ quantity1 = 0
 quantity2 = 0
 quantity3 = 0
 quantity4 = 0
+
+
+class LoginForm(FlaskForm):
+    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('password', validators=[InputRequired(), Length(min=4, max=80)])
+    remember = BooleanField('remember me')
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -92,6 +101,11 @@ def cart():
         res.set_cookie(item, str(quantity4), max_age=0)
         return res
     return render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, quantity4=quantity4)
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    return render_template('login.html')
 
 
 app.run(host='0.0.0.0', port=5000, debug=True)

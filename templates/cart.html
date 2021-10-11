@@ -25,8 +25,8 @@
       </nav>
     </div>
     </div>
-    <div class="cart-page">
-    {% if x1 %}
+<div class="cart-page">
+ {% if x1 %}
 <div class="cards-cart">
   <div class="container-fluid shadow-sm p-3 mb-5 bg-white rounded">
       <div class="row">
@@ -50,14 +50,14 @@
       <div class="card-price px-1">
         <h4>${{quantity1*599}}</h4>
       </div>
-            </div>
-  <form action="/cart" method="POST" class="card-buy">
-    <div class="card-buy top-bot">
-        <button class="btn btn-primary" type="submit" name="watch1" value="watch1">
+    </div>
+  <div class="col-md-3">
+  <form action="/cart" method="POST" class="card-buy" style="padding-top:35px;">
+        <button class="btn btn-primary" type="submit" name="watch1">
         Clear from cart
         </button>
-    </div>
   </form>
+          </div>
   </div>
   </div>
   </div>
@@ -87,13 +87,13 @@
         <h4>${{quantity2*599}}</h4>
       </div>
             </div>
-  <form action="/cart" method="POST" class="card-buy">
-    <div class="card-buy top-bot">
+      <div class="col-md-3">
+  <form action="/cart" method="POST" class="card-buy" style="padding-top:35px;">
         <button class="btn btn-primary" type="submit" name="watch2" value="watch2">
         Clear from cart
         </button>
-    </div>
   </form>
+  </div>
   </div>
   </div>
   </div>
@@ -123,16 +123,16 @@
         <h4>${{quantity3*599}}</h4>
       </div>
           </div>
-      <form action="/cart" method="POST" class="card-buy">
-      <div class="card-buy top-bot">
-        <button class="btn btn-primary" type="submit" name="watch3" value="watch3">
+          <div class="col-md-3">
+      <form action="/cart" method="POST" class="card-buy" style="padding-top:35px;">
+        <button style="padding-top:5px; height:auto;" class="btn btn-primary" type="submit" name="watch3" value="watch3">
         Clear from cart
         </button>
-      </div>
       </form>
   </div>
   </div>
   </div>
+</div>
     {%endif%}
     {% if x4 %}
                 <div class="cards-cart">
@@ -141,7 +141,7 @@
           <div class="col-md-2">
           <img src="../static/watch example.png" style="width:100%;"/>
           </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
       <div class="title">
               <h2 class="card-title text-align:center">Watch 4</h2>
         </div>
@@ -154,28 +154,25 @@
           <input class="form-control" type="number" name="q4" min="1" placeholder="{{quantity4}}">
               </form>
           </div>
-          <div class="col-md-1 top-bot">
+          <div class="col-md-2 top-bot">
       <div class="card-price px-1">
         <h4>${{quantity4*599}}</h4>
       </div>
           </div>
-      <form action="/cart" method="POST" class="card-buy">
-      <div class="card-buy top-bot">
-        <button class="btn btn-primary" type="submit" name="watch4" value="watch4">
-        Clear from cart
+      <div class="col-md-3">
+      <form action="/cart" method="POST" class="card-buy" style="padding-top:35px;">
+        <button class="fas fa-times btn btn-light" name="watch4" type="submit" value="watch4">
         </button>
-      </div>
+
       </form>
+      </div>
   </div>
   </div>
   </div>
     {%endif%}
-</section>
-
         {%if x1 or x2 or x3 or x4%}
         {{quantity1*599 + quantity2*599 + quantity3*599 + quantity4*599}}
         {%endif%}
-        <hr>
 </div>
 </body>
 </html>

@@ -138,6 +138,7 @@ padding: 10px;
 }
 
 .cards-cart {
+padding-top:5px;
 padding-left:5vmin;
 padding-right:5vmin;
 }
@@ -193,7 +194,6 @@ text-align:right;
  background-color: var(--light-gray);
 }
 .cart-page {
-padding-top:5px;
  background-color: var(--light-gray);
  width:75%;
 }
@@ -209,5 +209,9 @@ height:170px;
 
 .top-bot{
 padding-top:40px;
+
+.btn-primary{
+background-color: #f1f1f1 !important;
 }
+
 
