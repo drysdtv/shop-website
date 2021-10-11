@@ -3,9 +3,16 @@ import sqlite3 as sql
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Length
 from flask_wtf import FlaskForm
+from flask_bootstrap import Bootstrap
+import os
+
+x = str(os.urandom(16))
+
 
 app = Flask('app')
 
+bootstrap = Bootstrap(app)
+app.secret_key = x
 quantity1 = 0
 quantity2 = 0
 quantity3 = 0
@@ -105,7 +112,8 @@ def cart():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    return render_template('login.html')
+    form = LoginForm()
+    return render_template('login.html', form=form)
 
 
 app.run(host='0.0.0.0', port=5000, debug=True)
