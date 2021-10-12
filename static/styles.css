@@ -25,6 +25,19 @@ header a {
   color: white;
 }
 
+
+header button {
+  font-family: var(--Rubik);
+  font-size: 0.9em;
+  color: white;
+   background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -210,8 +223,6 @@ height:170px;
 .top-bot{
 padding-top:40px;
 
-.btn-primary{
-background-color: #f1f1f1 !important;
-}
+
 
 
