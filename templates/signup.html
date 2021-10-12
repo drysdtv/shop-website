@@ -27,6 +27,9 @@
 <form method="post" action="/sign">
 {{form.hidden_tag() }}
 {{wtf.form_field(form.username) }}
+        {% for error in form.username.errors %}
+        {{ error }}
+        {% endfor %}
 {{wtf.form_field(form.email) }}
 {{wtf.form_field(form.password) }}
 

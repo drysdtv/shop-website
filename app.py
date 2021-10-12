@@ -1,16 +1,20 @@
 from flask import Flask, render_template, request, redirect, url_for, make_response
 import sqlite3 as sql
 from wtforms import StringField, PasswordField, BooleanField
-from wtforms.validators import InputRequired, Email, Length
+from wtforms.validators import InputRequired, Email, Length, NoneOf, AnyOf
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
 import models as dbh
 import os
+import numpy as np
+import string
 
-dbh.createTable()
+dbh.createDB()
 
 x = str(os.urandom(16))
-
+charac = list(string.ascii_letters)
+number = list(string.digits)
+#print(number, charac)
 
 app = Flask('app')
 
@@ -31,7 +35,7 @@ class LoginForm(FlaskForm):
 class SignUp(FlaskForm):
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     email = StringField('email', validators=[InputRequired(), Email(message='Invalid Email'), Length(max=50)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=4, max=80)])
+    password = PasswordField('password', validators=[InputRequired(), Length(min=4, max=20, message='Please enter a password between 4 and 20 characters')])
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -46,24 +50,28 @@ def home():
             item = request.form.get('watch1')
             res = make_response(render_template('index.html'))
             res.set_cookie(item, str(quantity1))
+            dbh.addCart(str(item), 599, quantity1)
             return res
         if request.form.get('watch2'):
             item = request.form.get('watch2')
             quantity2 += 1
             res = make_response(render_template('index.html'))
             res.set_cookie(item, str(quantity2))
+            dbh.addCart(item, 599, quantity2)
             return res
         if request.form.get('watch3'):
             quantity3 += 1
             item = request.form.get('watch3')
             res = make_response(render_template('index.html'))
             res.set_cookie(item, str(quantity3))
+            dbh.addCart(item, 599, quantity3)
             return res
         if request.form.get('watch4'):
             quantity4 += 1
             item = request.form.get('watch4')
             res = make_response(render_template('index.html'))
             res.set_cookie(item, str(quantity4))
+            dbh.addCart(item, 599, quantity4)
             return res
     return render_template('index.html')
 
@@ -129,6 +137,7 @@ def login():
 def sign():
     form = SignUp()
     if form.validate_on_submit():
+        print('euibgws')
         dbh.insertUser(form.username.data, form.email.data, form.password.data)
     return render_template('signup.html', form=form)
 
