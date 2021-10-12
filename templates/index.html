@@ -50,8 +50,8 @@
             </li>
             <li class="nav-item">
               {% if loggedIn %}
-              <form action="/" method="post">
-                <button class="nav-link" href="/" type="submit" name="signout" value="signout" >SIGN OUT</button>
+              <form action="/index" method="post">
+                <button class="nav-link" href="/index" type="submit" name="signout" value="signout" >SIGN OUT</button>
               </form>
               {% elif not loggedIn%}
               <a class="nav-link" href="/login">LOGIN</a>
@@ -75,7 +75,7 @@
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere accusamus eum dignissimos ipsa sequi expedita.
           </p>
-          <form action="/" method="POST">
+          <form action="/index" method="POST">
           <button class="btn btn-light px-5 py-2 primary-btn" type="submit" name="watch1" value="watch1">
           Buy now for $599
           </button>
@@ -109,10 +109,10 @@
       <div class="card-price px-1">
         <h4>$599</h4>
       </div>
-          <form action="/" method="POST" class="card-buy">
+          <form action="/index" method="POST" class="card-buy">
             <div class="card-buy">
         <button class="btn btn-primary" type="submit" name="watch2" value="watch2">
-        Add to Cart...
+        Add to Cart
         </button>
             </div>
           </form>
@@ -136,10 +136,10 @@
       <div class="card-price px-1">
         <h4>$599</h4>
       </div>
-          <form action="/" method="POST" class="card-buy">
+          <form action="/index" method="POST" class="card-buy">
             <div class="card-buy">
         <button class="btn btn-primary" type="submit" name="watch3" value="watch3">
-        Add to Cart...
+        Add to Cart
         </button>
             </div>
           </form>
@@ -162,7 +162,7 @@
       <div class="card-price px-1">
         <h4>$599</h4>
       </div>
-      <form action="/" method="POST" class="card-buy">
+      <form action="/index" method="POST" class="card-buy">
       <div class="card-buy">
         <button class="btn btn-primary" type="submit" name="watch4" value="watch4">
         Add to Cart
