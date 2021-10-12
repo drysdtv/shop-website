@@ -4,7 +4,10 @@ from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Length
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
+import models as dbh
 import os
+
+dbh.createTable()
 
 x = str(os.urandom(16))
 
@@ -23,6 +26,12 @@ class LoginForm(FlaskForm):
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     password = PasswordField('password', validators=[InputRequired(), Length(min=4, max=80)])
     remember = BooleanField('remember me')
+    
+    
+class SignUp(FlaskForm):
+    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
+    email = StringField('email', validators=[InputRequired(), Email(message='Invalid Email'), Length(max=50)])
+    password = PasswordField('password', validators=[InputRequired(), Length(min=4, max=80)])
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -114,6 +123,15 @@ def cart():
 def login():
     form = LoginForm()
     return render_template('login.html', form=form)
+
+
+@app.route('/sign', methods=['POST', 'GET'])
+def sign():
+    form = SignUp()
+    if form.validate_on_submit():
+        print('hello')
+        dbh.insertUser(form.username.data, form.email.data, form.password.data)
+    return render_template('signup.html', form=form)
 
 
 app.run(host='0.0.0.0', port=5000, debug=True)
