@@ -16,23 +16,22 @@ def createDB():
                    ")")
 
 
-def retrieveUser():
-    con = sql.connect("website.db")
+def retrieveUser(username):
+    con = sql.connect('website.db')
     cur = con.cursor()
-    cur.execute("SELECT username, password FROM login")
+    cur.execute("SELECT * FROM login where username = (?)", username)
     users = cur.fetchall()
     con.close()
-    return users
 
 
 def insertUser(username, email, password):
-    con = sql.connect("website.db")
+    con = sql.connect('website.db')
     cur = con.cursor()
-    cur.execute("INSERT OR IGNORE INTO login (username, email,password) VALUES (?,?,?)", (username, email, password))
+    cur.execute("INSERT OR IGNORE INTO login (username, email, password) VALUES (?, ?, ?)", (username, email, password))
     con.commit()
     con.close()
-    
-    
+
+
 def addCart(name, price, quantity):
     con = sql.connect("website.db")
     cur = con.cursor()

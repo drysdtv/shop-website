@@ -13,6 +13,13 @@
   <link rel="stylesheet" href="static/styles.css" />
   <link rel="stylesheet" href="static/mobile-style.css">
 </head>
+<script>
+function textType(input) {
+    var regex = /[^a-z 0-9 ! @ # $ ^ & * ( ) .]/gi;
+    input.value = input.value.replace(regex, "");
+}
+
+</script>
 <body>
 
 {% import "bootstrap/wtf.html" as wtf %}
@@ -24,10 +31,13 @@
       </nav>
     </div>
     </div>
+{%if fail%}
+ Unsucessful Login. Try again
+{%endif%}
 <form method="post" action="/login">
 {{form.hidden_tag() }}
-{{wtf.form_field(form.username) }}
-{{wtf.form_field(form.password) }}
+{{wtf.form_field(form.username, onkeyup="textType(this)") }}
+{{wtf.form_field(form.password, onkeyup="textType(this)") }}
 {{wtf.form_field(form.remember) }}
 
 <button class="btn btn light" type="submit">Log In</button>

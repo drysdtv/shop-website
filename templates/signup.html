@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Login</title>
+  <title>Sign Up</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous" />
@@ -13,6 +13,14 @@
   <link rel="stylesheet" href="static/styles.css" />
   <link rel="stylesheet" href="static/mobile-style.css">
 </head>
+<script>
+function textType(input) {
+    var regex = /[^a-z 0-9 ! @ # $ ^ & * ( ) .]/gi;
+    input.value = input.value.replace(regex, "");
+}
+
+</script>
+
 <body>
 
 {% import "bootstrap/wtf.html" as wtf %}
@@ -26,12 +34,18 @@
     </div>
 <form method="post" action="/sign">
 {{form.hidden_tag() }}
-{{wtf.form_field(form.username) }}
-        {% for error in form.username.errors %}
-        {{ error }}
-        {% endfor %}
-{{wtf.form_field(form.email) }}
-{{wtf.form_field(form.password) }}
+{{wtf.form_field(form.username, onkeyup="textType(this)")}}
+    {% for error in form.username.errors %}
+    {{ error }} <!-- styling around the error in for loop -->
+    {% endfor %}
+{{wtf.form_field(form.email, onkeyup="textType(this)") }}
+    {% for error in form.email.errors %}
+    {{ error }}
+    {% endfor %}
+{{wtf.form_field(form.password, onkeyup="textType(this)") }}
+        {% for error in form.email.errors %}
+    {{ error }}
+    {% endfor %}
 
 
 <button class="btn btn light" type="submit">Sign Up</button>

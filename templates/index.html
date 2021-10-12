@@ -49,7 +49,13 @@
               <a class="nav-link" href="#">ABOUT</a>
             </li>
             <li class="nav-item">
+              {% if loggedIn %}
+              <form action="/" method="post">
+                <button class="nav-link" href="/" type="submit" name="signout" value="signout" >SIGN OUT</button>
+              </form>
+              {% elif not loggedIn%}
               <a class="nav-link" href="/login">LOGIN</a>
+              {% endif %}
             </li>
           </ul>
             <div class="set-right">
