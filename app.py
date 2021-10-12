@@ -129,7 +129,6 @@ def login():
 def sign():
     form = SignUp()
     if form.validate_on_submit():
-        print('hello')
         dbh.insertUser(form.username.data, form.email.data, form.password.data)
     return render_template('signup.html', form=form)
 
