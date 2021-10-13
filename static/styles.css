@@ -13,6 +13,7 @@ section {
   --Rubik: "Rubik", cursive;
   --Patua: "Patua One", cursive;
   --Lobster: "lobster", cursive;
+  --ubuntu: 'Ubuntu', sans-serif;
   --light-black: #2e2c2caf;
   --background-image: url("/static/banner.png");
   --background-color: linear-gradient(360deg, rgba(0,182,255,1) 0%, rgba(238,0,255,1) 100%);
@@ -208,7 +209,7 @@ text-align:right;
 }
 .cart-page {
  background-color: var(--light-gray);
- width:75%;
+ width:65%;
 }
 
 .nav-padding{
@@ -221,8 +222,16 @@ height:170px;
 }
 
 .top-bot{
-padding-top:40px;
+padding-top:35px;
+}
 
-
-
-
+.fuckyou {
+   background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    font-family: var(--ubuntu);
+    font-size: 20px;
+}
