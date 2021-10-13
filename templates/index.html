@@ -13,6 +13,7 @@
     crossorigin="anonymous">
   <link rel="stylesheet" href="static/styles.css" />
   <link rel="stylesheet" href="static/mobile-style.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 
 
@@ -182,7 +183,7 @@
 <section>
   <div class="customer ">
   <div class="col-md-7 col-sm-12">
-<div class="card card shadow-lg p-3 mb-5 bg-white rounded customer-feed">
+<div class="card card shadow-lg p-3 mb-5 bg-white rounded " data-aos="fade-right">
 <div class="card-body">
       <div class="title">
                   <h2 class="card-title text-align:center">What Our Customers Say About Us</h2>
@@ -195,4 +196,10 @@
   </div>
   </div>
 </section>
+ <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+    duration: 2000,
+    });
+  </script>
 </body>
