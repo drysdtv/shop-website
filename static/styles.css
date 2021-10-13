@@ -18,6 +18,7 @@ section {
   --background-image: url("/static/banner.png");
   --background-color: linear-gradient(360deg, rgba(0,182,255,1) 0%, rgba(238,0,255,1) 100%);
   --light-gray: rgba(240, 240, 240, 0.877);
+  --get-fucked: rgba(200,200,200, 0.9)
 }
 
 header a {
@@ -123,7 +124,6 @@ header .container .col-md-7 p {
 }
 
 .primary-img {
-
     padding-top: 10vmin;
 }
 .product-title {
@@ -152,9 +152,6 @@ padding: 10px;
 }
 
 .cards-cart {
-padding-top:5px;
-padding-left:5vmin;
-padding-right:5vmin;
 }
 
 .card-hover:hover{
@@ -208,8 +205,7 @@ text-align:right;
  background-color: var(--light-gray);
 }
 .cart-page {
- background-color: var(--light-gray);
- width:65%;
+ width:100%;
 }
 
 .nav-padding{
@@ -233,7 +229,14 @@ padding-top:35px;
     overflow: hidden;
     outline: none;
     font-family: var(--ubuntu);
-    font-size: 20px;
+    font-size: 0.9em;
+}
+
+hr { margin-top: 10px; margin-bottom: 10px; height:2px; border:none; background: var(--get-fucked)}
+
+.imgg {
+width:100%;
+padding-top:20px;
 }
 
 .customer {

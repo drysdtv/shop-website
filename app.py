@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response, flash
+import flask_login
+from flask import Flask, render_template, request, redirect, url_for, make_response, flash, session
 import sqlite3 as sql
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Length, NoneOf, AnyOf
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
-from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user, set_login_view
 import models as dbh
 import os
 import string
@@ -23,6 +24,7 @@ quantity1 = 0
 quantity2 = 0
 quantity3 = 0
 quantity4 = 0
+admin = False
 
 
 class User(UserMixin):
@@ -48,6 +50,10 @@ class User(UserMixin):
         return self.id
 
 
+loginManager.login_view = "login"
+loginManager.login_message = "please login before trying that"
+
+
 @loginManager.user_loader
 def load_user(user_id):
     connection = sql.connect("website.db")
@@ -71,6 +77,7 @@ class SignUp(FlaskForm):
     email = StringField('email', validators=[InputRequired(), Email(message='Invalid Email'), Length(max=50)])
     password = PasswordField('password', validators=[InputRequired(), Length(min=4, max=20,
                                                                              message='Please enter a password between 4 and 20 characters')])
+
 
 @app.route('/')
 def starting():
@@ -114,8 +121,10 @@ def index():
             dbh.addCart(item, 599, quantity4)
             return res
         if request.form.get('signout'):
-            print('good')
-    return render_template('index.html', loggedIn=loggedIn)
+            flask_login.logout_user()
+            loggedIn = False
+            return render_template("index.html")
+    return render_template('index.html', loggedIn=loggedIn, admin=admin)
 
 
 @app.route('/cart', methods=['POST', 'GET'])
@@ -147,31 +156,36 @@ def cart():
         quantity1 = 0
         item = request.form.get('watch1')
         res = make_response(
-            render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn))
+            render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2,
+                            quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn))
         res.set_cookie(item, str(quantity1), max_age=0)
         return res
     if request.form.get('watch2'):
         quantity2 = 0
         item = request.form.get('watch2')
         res = make_response(
-            render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn))
+            render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2,
+                            quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn))
         res.set_cookie(item, str(quantity2), max_age=0)
         return res
     if request.form.get('watch3'):
         quantity3 = 0
         item = request.form.get('watch3')
         res = make_response(
-            render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn))
+            render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2,
+                            quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn))
         res.set_cookie(item, expires=0)
         return res
     if request.form.get('watch4'):
         quantity4 = 0
         item = request.form.get('watch4')
         res = make_response(
-            render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn))
+            render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2,
+                            quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn))
         res.set_cookie(item, str(quantity4), max_age=0)
         return res
-    return render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn)
+    return render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2,
+                           quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn)
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -185,10 +199,11 @@ def login():
     global quantity3
     global quantity4
     global loggedIn
+    global admin
     form = LoginForm()
     if current_user.is_authenticated:
         loggedIn = True
-        return render_template('index.html', loggedIn=loggedIn)
+        return render_template('index.html', loggedIn=loggedIn, admin=admin)
     if form.validate_on_submit():
         con = sql.connect("website.db")
         cur = con.cursor()
@@ -203,7 +218,12 @@ def login():
                 if form.password.data == us.password:
                     login_user(us, remember=form.remember.data)
                     loggedIn = True
-                    return render_template('cart.html', loggedIn=loggedIn, name=us.username, x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, quantity4=quantity4)
+                    print(us.get_id())
+                    if us.get_id() == '1' or us.get_id() == '2':
+                        admin = True
+                    else:
+                        admin = False
+                    return render_template('index.html', loggedIn=loggedIn, admin=admin)
     return render_template('login.html', form=form)
 
 
@@ -213,6 +233,22 @@ def sign():
     if form.validate_on_submit():
         dbh.insertUser(form.username.data, form.email.data, form.password.data)
     return render_template('signup.html', form=form)
+
+
+@app.route('/orders', methods=['POST', 'GET'])
+def orders():
+    global admin
+    print(admin)
+    if admin is True:
+        return render_template('admin.html', admin=admin)
+    else:
+        return redirect(url_for("login"))
+
+
+@app.route('/checkout', methods=['POST', 'GET'])
+@login_required
+def checkout():
+    return render_template("checkout.html")
 
 
 app.run(host='0.0.0.0', port=5000, debug=True)
