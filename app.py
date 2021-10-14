@@ -8,13 +8,13 @@ from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user, set_login_view
 import models as dbh
 import os
-import pygame
 import string
 
 dbh.createDB()
 
 x = str(os.urandom(16))
 
+page = None
 app = Flask('app')
 loggedIn = False
 loginManager = LoginManager(app)
@@ -87,11 +87,13 @@ def starting():
 
 @app.route('/index', methods=['POST', 'GET'])
 def index():
+    global page
     global loggedIn
     global quantity1
     global quantity2
     global quantity3
     global quantity4
+    page = "index"
     if request.method == 'POST':
         if request.form.get('watch1'):
             quantity1 += 1
@@ -130,6 +132,7 @@ def index():
 
 @app.route('/cart', methods=['POST', 'GET'])
 def cart():
+    global page
     global loggedIn
     x1 = request.cookies.get('watch1')
     x2 = request.cookies.get('watch2')
@@ -139,6 +142,7 @@ def cart():
     global quantity2
     global quantity3
     global quantity4
+    page = "cart"
     if request.method == 'POST':
         if request.form.get("q1"):
             u1 = int(request.form["q1"])
@@ -201,6 +205,7 @@ def login():
     global quantity4
     global loggedIn
     global admin
+    global page
     form = LoginForm()
     if current_user.is_authenticated:
         loggedIn = True
@@ -222,9 +227,10 @@ def login():
                     print(us.get_id())
                     if us.get_id() == '1' or us.get_id() == '2':
                         admin = True
+                        page = "orders"
                     else:
                         admin = False
-                    return render_template('index.html', loggedIn=loggedIn, admin=admin)
+                    return redirect(url_for(page))
     return render_template('login.html', form=form)
 
 

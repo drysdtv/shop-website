@@ -19,6 +19,11 @@ function textType(input) {
     input.value = input.value.replace(regex, "");
 }
 
+  document.getElementById('go-back').addEventListener('click', () => {
+  history.go(-1);
+});
+
+</script>
 </script>
 <body>
 
@@ -32,9 +37,9 @@ function textType(input) {
     </div>
     </div>
 {%if fail%}
- Unsucessful Login. Try again
+ <h1> Unsucessful Login. Try again </h1>
 {%endif%}
-<form method="post" action="/login">
+<form method="post">
 {{form.hidden_tag() }}
 {{wtf.form_field(form.username, onkeyup="textType(this)") }}
 {{wtf.form_field(form.password, onkeyup="textType(this)") }}
