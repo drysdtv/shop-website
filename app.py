@@ -8,6 +8,7 @@ from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user, set_login_view
 import models as dbh
 import os
+import pygame
 import string
 
 dbh.createDB()
