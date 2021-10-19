@@ -9,10 +9,11 @@ from flask_login import LoginManager, UserMixin, login_required, login_user, log
 import models as dbh
 import os
 import string
+import array
 
 dbh.createDB()
 
-x = str(os.urandom(16))
+x = str(os.urandom(32))
 
 page = None
 app = Flask('app')
@@ -25,7 +26,14 @@ quantity1 = 0
 quantity2 = 0
 quantity3 = 0
 quantity4 = 0
+stock1 = 4
+stock2 = 4
+stock3 = 4
+stock4 = 4
 admin = False
+
+watchesCart = [
+]
 
 
 class User(UserMixin):
@@ -87,118 +95,130 @@ def starting():
 
 @app.route('/index', methods=['POST', 'GET'])
 def index():
-    global page
     global loggedIn
     global quantity1
     global quantity2
     global quantity3
     global quantity4
+    global page
+    global watchesCart
+    global stock1
+    global stock2
+    global stock3
+    global stock4
     page = "index"
     if request.method == 'POST':
         if request.form.get('watch1'):
             quantity1 += 1
-            item = request.form.get('watch1')
-            res = make_response(redirect(url_for("index")))
-            res.set_cookie(item, str(quantity1))
-            dbh.addCart(str(item), 599, quantity1)
-            return res
+            stock1 -= 1
+            p = len(watchesCart)
+            if p == 0:
+                watchesCart.insert(0, {"id": 1, 'name': request.form.get("watch1"), "quantity": quantity1, "stock": stock1})
+            else:
+                for i in range(len(watchesCart)):
+                    if watchesCart[i].get("name") == request.form.get("watch1"):
+                        watchesCart[i].update({'name': request.form.get("watch1"), "quantity": quantity1, "stock": stock1})
+                        return render_template("index.html", watchesCart=watchesCart)
+                print(len(watchesCart))
+                watchesCart.insert(len(watchesCart), {"id": (len(watchesCart) + 1), 'name': request.form.get("watch1"), "quantity": quantity1, "stock": stock1})
+            return render_template("index.html", watchesCart=watchesCart)
         if request.form.get('watch2'):
-            item = request.form.get('watch2')
+            stock2 -= 1
             quantity2 += 1
-            res = make_response(redirect(url_for("index")))
-            res.set_cookie(item, str(quantity2))
-            dbh.addCart(item, 599, quantity2)
-            return res
+            p = len(watchesCart)
+            if p == 0:
+                watchesCart.insert(0, {"id": 1, 'name': request.form.get("watch2"), "quantity": quantity2, "stock": stock2})
+            else:
+                for i in range(len(watchesCart)):
+                    if watchesCart[i].get("name") == request.form.get("watch2"):
+                        watchesCart[i].update({"quantity": quantity2, "stock": stock2})
+                        return render_template("index.html", watchesCart=watchesCart)
+                watchesCart.insert(len(watchesCart), {"id": (len(watchesCart) + 1), 'name': request.form.get("watch2"), "quantity": quantity2, "stock": stock2})
+            return render_template("index.html", watchesCart=watchesCart)
         if request.form.get('watch3'):
             quantity3 += 1
-            item = request.form.get('watch3')
-            res = make_response(redirect(url_for("index")))
-            res.set_cookie(item, str(quantity3))
-            dbh.addCart(item, 599, quantity3)
-            return res
+            stock3 -= 1
+            p = len(watchesCart)
+            if p == 0:
+                watchesCart.insert(len(watchesCart), {"id": 1, 'name': request.form.get("watch3"), "quantity": quantity3, "stock": stock3})
+            else:
+                for i in range(len(watchesCart)):
+                    if watchesCart[i].get("name") == request.form.get("watch3"):
+                        watchesCart[i].update(
+                            {'name': request.form.get("watch3"), "quantity": quantity3, "stock": stock3})
+                        return render_template("index.html", watchesCart=watchesCart)
+                print(len(watchesCart))
+                watchesCart.insert(len(watchesCart), {"id": (len(watchesCart) + 1), 'name': request.form.get("watch3"), "quantity": quantity3, "stock": stock3})
+            return render_template("index.html", watchesCart=watchesCart)
         if request.form.get('watch4'):
             quantity4 += 1
-            item = request.form.get('watch4')
-            res = make_response(redirect(url_for("index")))
-            res.set_cookie(item, str(quantity4))
-            dbh.addCart(item, 599, quantity4)
-            return res
+            stock4 -= 1
+            p = len(watchesCart)
+            if p == 0:
+                watchesCart.insert(0, {"id": 1, 'name': request.form.get("watch4"), "quantity": quantity4, "stock": stock4})
+            else:
+                for i in range(len(watchesCart)):
+                    if watchesCart[i].get("name") == request.form.get("watch4"):
+                        watchesCart[i].update({'name': request.form.get("watch4"), "quantity": quantity4, "stock": stock4})
+                        return render_template("index.html", watchesCart=watchesCart)
+                print(len(watchesCart))
+                watchesCart.insert(len(watchesCart), {"id": (len(watchesCart) + 1), 'name': request.form.get("watch4"), "quantity": quantity4, "stock": stock4})
+            return render_template("index.html", watchesCart=watchesCart)
         if request.form.get('signout'):
             flask_login.logout_user()
             loggedIn = False
             return render_template("index.html")
-    return render_template('index.html', loggedIn=loggedIn, admin=admin)
+    return render_template('index.html', loggedIn=loggedIn, admin=admin, watchesCart=watchesCart)
 
 
 @app.route('/cart', methods=['POST', 'GET'])
 def cart():
-    global page
-    global loggedIn
+    global page, loggedIn, quantity1, quantity2, quantity3, quantity4, watchesCart, stock1, stock2, stock3, stock4
     x1 = request.cookies.get('watch1')
     x2 = request.cookies.get('watch2')
     x3 = request.cookies.get('watch3')
     x4 = request.cookies.get('watch4')
-    global quantity1
-    global quantity2
-    global quantity3
-    global quantity4
-    page = "cart"
+    page = "checkout"
     if request.method == 'POST':
-        if request.form.get("q1"):
-            u1 = int(request.form["q1"])
-            quantity1 = u1
-        if request.form.get("q2"):
-            u1 = int(request.form["q2"])
-            quantity2 = u1
-        if request.form.get("q3"):
-            u1 = int(request.form["q3"])
-            quantity3 = u1
-        if request.form.get("q4"):
-            u1 = int(request.form["q4"])
-            quantity4 = u1
-
-    if request.form.get('watch1'):
-        quantity1 = 0
-        item = request.form.get('watch1')
-        res = make_response(
-            render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2,
-                            quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn))
-        res.set_cookie(item, str(quantity1), max_age=0)
-        return res
-    if request.form.get('watch2'):
-        quantity2 = 0
-        item = request.form.get('watch2')
-        res = make_response(
-            render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2,
-                            quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn))
-        res.set_cookie(item, str(quantity2), max_age=0)
-        return res
-    if request.form.get('watch3'):
-        quantity3 = 0
-        item = request.form.get('watch3')
-        res = make_response(
-            render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2,
-                            quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn))
-        res.set_cookie(item, expires=0)
-        return res
-    if request.form.get('watch4'):
-        quantity4 = 0
-        item = request.form.get('watch4')
-        res = make_response(
-            render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2,
-                            quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn))
-        res.set_cookie(item, str(quantity4), max_age=0)
-        return res
-    return render_template('cart.html', x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2,
-                           quantity3=quantity3, quantity4=quantity4, loggedIn=loggedIn)
+        for x in range(len(watchesCart)):
+            print(watchesCart[x].get("id"))
+            print(request.form)
+            if str(watchesCart[x].get("id")) in request.form.keys():
+                print("good")
+                watchesCart[x].update({"quantity": (int(request.form[str(watchesCart[x].get("id"))]))})
+        if request.form.get('watch1'):
+            quantity1 = 0
+            stock1 = 4
+            for i in range(len(watchesCart)):
+                if watchesCart[(i-1)].get("name") == request.form.get("watch1"):
+                    watchesCart.pop((i-1))
+                    return render_template('cart.html', watchesCart=watchesCart)
+        if request.form.get('watch2'):
+            quantity2 = 0
+            stock2 = 4
+            for i in range(len(watchesCart)):
+                if watchesCart[i].get("name") == request.form.get("watch2"):
+                    watchesCart.pop((i - 1))
+                    return render_template('cart.html', watchesCart=watchesCart)
+        if request.form.get('watch3'):
+            quantity3 = 0
+            stock3 = 4
+            for i in range(len(watchesCart)):
+                if watchesCart[i].get("name") == request.form.get("watch3"):
+                    watchesCart.pop((i-1))
+                    return render_template('cart.html', watchesCart=watchesCart)
+        if request.form.get('watch4'):
+            quantity4 = 0
+            stock4 = 4
+            for i in range(len(watchesCart)):
+                if watchesCart[i].get("name") == request.form.get("watch4"):
+                    watchesCart.pop((i-1))
+                    return render_template('cart.html', watchesCart=watchesCart)
+    return render_template('cart.html', watchesCart=watchesCart)
 
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    x1 = request.cookies.get('watch1')
-    x2 = request.cookies.get('watch2')
-    x3 = request.cookies.get('watch3')
-    x4 = request.cookies.get('watch4')
     global quantity1
     global quantity2
     global quantity3
@@ -209,7 +229,7 @@ def login():
     form = LoginForm()
     if current_user.is_authenticated:
         loggedIn = True
-        return render_template('index.html', loggedIn=loggedIn, admin=admin)
+        return redirect(url_for(page))
     if form.validate_on_submit():
         con = sql.connect("website.db")
         cur = con.cursor()
@@ -245,7 +265,6 @@ def sign():
 @app.route('/orders', methods=['POST', 'GET'])
 def orders():
     global admin
-    print(admin)
     if admin is True:
         return render_template('admin.html', admin=admin)
     else:
@@ -255,7 +274,11 @@ def orders():
 @app.route('/checkout', methods=['POST', 'GET'])
 @login_required
 def checkout():
-    return render_template("checkout.html")
+    x1 = request.cookies.get('watch1')
+    x2 = request.cookies.get('watch2')
+    x3 = request.cookies.get('watch3')
+    x4 = request.cookies.get('watch4')
+    return render_template("checkout.html", x1=x1, x2=x2, x3=x3, x4=x4, quantity1=quantity1, quantity2=quantity2, quantity3=quantity3, quantity4=quantity4)
 
 
 app.run(host='0.0.0.0', port=5000, debug=True)

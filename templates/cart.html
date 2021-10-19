@@ -31,7 +31,7 @@
 
 
 <div class="cart-page">
- {% if x1 %}
+ {% if watchesCart[0] %}
 <div class="cards-cart">
           <hr>
   <div class="container-fluid bg-white">
@@ -41,7 +41,7 @@
           </div>
             <div class="col-md-5">
       <div class="title">
-              <h2 class="card-title text-align:center">Watch 1</h2>
+              <h2 class="card-title text-align:center">{{watchesCart[0].get("name")}}</h2>
         </div>
       <div class="card-text">
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, tenetur.</p>
@@ -49,17 +49,17 @@
             </div>
           <div class="col-md-1 top-bot">
               <form method="POST" action="/cart">
-          <input class="form-control" type="number" name="q1" min="1" placeholder="{{quantity1}}">
+          <input class="form-control" type="number" name="{{watchesCart[0].get('id')}}" min="1" placeholder="{{watchesCart[0].get('quantity')}}" max="4">
               </form>
           </div>
           <div class="col-md-1 top-bot">
       <div class="card-price px-1">
-        <h4>${{quantity1*599}}</h4>
+        <h4>${{watchesCart[0].get('quantity')*599}}</h4>
       </div>
             </div>
       <div class="col-md-3">
   <form action="/cart" method="POST" class="card-buy" style="padding-top:35px;">
-        <button class="btn btn-primary" type="submit" name="watch1" value="watch1">
+        <button class="btn btn-primary" type="submit" name="{{watchesCart[0].get('name')}}" value="{{watchesCart[0].get('name')}}">
         Clear from cart
         </button>
   </form>
@@ -68,7 +68,7 @@
   </div>
   </div>
     {%endif%}
-    {% if x2 %}
+    {% if watchesCart[1] %}
       <div class="cards-cart">
           <hr>
   <div class="container-fluid bg-white">
@@ -78,7 +78,7 @@
           </div>
             <div class="col-md-5">
       <div class="title">
-              <h2 class="card-title text-align:center">Watch 2</h2>
+              <h2 class="card-title text-align:center">{{watchesCart[1].get('name')}}</h2>
         </div>
       <div class="card-text">
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, tenetur.</p>
@@ -86,17 +86,17 @@
             </div>
           <div class="col-md-1 top-bot">
               <form method="POST" action="/cart">
-          <input class="form-control" type="number" name="q2" min="1" placeholder="{{quantity2}}">
+          <input class="form-control" type="number" name="{{watchesCart[1].get('id')}}" min="1" placeholder="{{watchesCart[1].get('quantity')}}">
               </form>
           </div>
           <div class="col-md-1 top-bot">
       <div class="card-price px-1">
-        <h4>${{quantity2*599}}</h4>
+        <h4>${{watchesCart[1].get('quantity')*599}}</h4>
       </div>
             </div>
       <div class="col-md-3">
   <form action="/cart" method="POST" class="card-buy" style="padding-top:35px;">
-        <button class="btn btn-primary" type="submit" name="watch2" value="watch2">
+        <button class="btn btn-primary" type="submit" name="{{watchesCart[1].get('name')}}" value="{{watchesCart[1].get('name')}}">
         Clear from cart
         </button>
   </form>
@@ -105,7 +105,8 @@
   </div>
   </div>
     {%endif%}
-    {% if x3 %}
+
+    {% if watchesCart[2] %}
     <div class="cards-cart">
         <hr>
   <div style="width:100%" class="container-fluid bg-white">
@@ -115,7 +116,7 @@
           </div>
             <div class="col-md-5">
       <div class="title">
-              <h2 class="card-title text-align:center">Watch 3</h2>
+              <h2 class="card-title text-align:center">{{watchesCart[2].get('name')}}</h2>
         </div>
       <div class="card-text">
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, tenetur.</p>
@@ -123,17 +124,17 @@
             </div>
           <div class="col-md-1 top-bot">
               <form method="POST" action="/cart">
-          <input class="form-control" type="number" name="q3" value="q3" min="1" placeholder="{{quantity3}}">
+          <input class="form-control" type="number" name="{{watchesCart[2].get('id')}}" value="{{watchesCart[2].get('id')}}" min="1" placeholder="{{watchesCart[2].get('quantity')}}">
               </form>
           </div>
           <div class="col-md-1 top-bot">
       <div class="card-price px-1">
-        <h4>${{quantity3*599}}</h4>
+        <h4>${{watchesCart[2].get('quantity')*599}}</h4>
       </div>
           </div>
           <div class="col-md-3">
       <form action="/cart" method="POST" class="card-buy" style="padding-top:35px;">
-        <button class="btn btn-primary" type="submit" name="watch3" value="watch3">
+        <button class="btn btn-primary" type="submit" name="{{watchesCart[2].get('name')}}" value="{{watchesCart[2].get('name')}}">
         Clear from cart
         </button>
       </form>
@@ -142,7 +143,7 @@
   </div>
 </div>
     {%endif%}
-    {% if x4 %}
+    {% if watchesCart[3] %}
     <div class="cards-cart">
         <hr>
   <div style="width:100%" class="container-fluid bg-white">
@@ -152,7 +153,7 @@
           </div>
             <div class="col-md-5">
       <div class="title">
-              <h2 class="card-title text-align:center">Watch 4</h2>
+              <h2 class="card-title text-align:center">{{watchesCart[3].get('name')}}</h2>
         </div>
       <div class="card-text">
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, tenetur.</p>
@@ -160,17 +161,17 @@
             </div>
           <div class="col-md-1 top-bot">
               <form method="POST" action="/cart">
-          <input class="form-control" type="number" name="q4" min="1" placeholder="{{quantity4}}">
+          <input class="form-control" type="number" name="{{watchesCart[3].get('id')}}" min="1" placeholder="{{watchesCart[3].get('quantity')}}">
               </form>
           </div>
           <div class="col-md-1 top-bot">
       <div class="card-price px-1">
-        <h4>${{quantity4*599}}</h4>
+        <h4>${{watchesCart[3].get('quantity')*599}}</h4>
       </div>
             </div>
       <div class="col-md-3">
       <form action="/cart" method="POST" class="card-buy" style="padding-top:35px;">
-        <button class="btn btn-primary" type="submit" name="watch4" value="watch4">
+        <button class="btn btn-primary" type="submit" name="{{watchesCart[3].get('name')}}" value="{{watchesCart[3].get('name')}}">
             Clear from cart
         </button>
       </form>
@@ -181,15 +182,17 @@
     <hr>
 </div>
     {%endif%}
-        {%if x1 or x2 or x3 or x4%}
-        {{quantity1*599 + quantity2*599 + quantity3*599 + quantity4*599}}
+
 
 </div>
     <div class="col-md-3">
+        {%if x1 or x2 or x3 or x4%}
         <a class="btn btn-outline-primary" href="/checkout">Check Out</a>
+        {{1*599 + 2*599 + 3*599 + 4*599}}
+    {%endif%}
 </div>
-    </div>
-{%endif%}
+
+</div>
 </body>
 </html>
 
