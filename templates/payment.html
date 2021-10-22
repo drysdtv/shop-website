@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="static/styles.css" />
+  <link rel="stylesheet" href="static/mobile-style.css">
+</head>
+<script>
+    function textType(input) {
+    var regex = /[^a-z 0-9 ! @ # $ ^ & * ( ) .]/gi;
+    input.value = input.value.replace(regex, "");
+}
+</script>
+<body>
+{% import "bootstrap/wtf.html" as wtf %}
+
+<form method="post">
+{{form.hidden_tag() }}
+{{wtform.form_field(form.cardNumber, onkeyup="textType(this)") }}
+<button class="btn btn light" type="submit">Log In</button>
+</form>
+
+
+</body>
+</html>

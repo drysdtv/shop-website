@@ -1,8 +1,8 @@
 import flask_login
 from flask import Flask, render_template, request, redirect, url_for, make_response, flash, session
 import sqlite3 as sql
-from wtforms import StringField, PasswordField, BooleanField
-from wtforms.validators import InputRequired, Email, Length, NoneOf, AnyOf
+from wtforms import StringField, PasswordField, BooleanField, IntegerField
+from wtforms.validators import InputRequired, Email, Length, NoneOf, AnyOf, NumberRange
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user, set_login_view
@@ -85,8 +85,15 @@ class LoginForm(FlaskForm):
 class SignUp(FlaskForm):
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     email = StringField('email', validators=[InputRequired(), Email(message='Invalid Email'), Length(max=50)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=4, max=20,
-                                                                             message='Please enter a password between 4 and 20 characters')])
+    password = PasswordField('password', validators=[InputRequired(), Length(min=4, max=20, message='Please enter a password between 4 and 20 characters')])
+
+
+class Paying(FlaskForm):
+    cardNumber = IntegerField('number', validators=[InputRequired(), Length(min=12, max=12)])
+    cvv = IntegerField('security', validators=[InputRequired(), Length(3), NumberRange(min=000, max=999)])
+    name = StringField('name', validators=[InputRequired()])
+    address = StringField('address', validators=[InputRequired()])
+    location = StringField('location', validators=[InputRequired()])
 
 
 @app.route('/')
@@ -114,57 +121,70 @@ def index():
             stock1 -= 1
             p = len(watchesCart)
             if p == 0:
-                watchesCart.insert(0, {"id": 1, 'name': request.form.get("watch1"), "quantity": quantity1, "stock": stock1, "price": 599})
+                watchesCart.insert(0,
+                                   {"id": 1, 'name': request.form.get("watch1"), "quantity": quantity1, "stock": stock1,
+                                    "price": 599})
             else:
                 for i in range(len(watchesCart)):
                     if watchesCart[i].get("name") == request.form.get("watch1"):
-                        watchesCart[i].update({'name': request.form.get("watch1"), "quantity": quantity1, "stock": stock1})
-                        return render_template("index.html", watchesCart=watchesCart)
+                        watchesCart[i].update(
+                            {'name': request.form.get("watch1"), "quantity": quantity1, "stock": stock1})
+                        return render_template("index.html", watchesCart=watchesCart, loggedIn=loggedIn)
                 print(len(watchesCart))
-                watchesCart.insert(len(watchesCart), {"id": (len(watchesCart) + 1), 'name': request.form.get("watch1"), "quantity": quantity1, "stock": stock1, "price": 599})
-            return render_template("index.html", watchesCart=watchesCart)
+                watchesCart.insert(len(watchesCart), {"id": (len(watchesCart) + 1), 'name': request.form.get("watch1"),
+                                                      "quantity": quantity1, "stock": stock1, "price": 599})
+            return render_template("index.html", watchesCart=watchesCart, loggedIn=loggedIn)
         if request.form.get('watch2'):
             stock2 -= 1
             quantity2 += 1
             p = len(watchesCart)
             if p == 0:
-                watchesCart.insert(0, {"id": 1, 'name': request.form.get("watch2"), "quantity": quantity2, "stock": stock2, "price": 599})
+                watchesCart.insert(0,
+                                   {"id": 1, 'name': request.form.get("watch2"), "quantity": quantity2, "stock": stock2,
+                                    "price": 599})
             else:
                 for i in range(len(watchesCart)):
                     if watchesCart[i].get("name") == request.form.get("watch2"):
                         watchesCart[i].update({"quantity": quantity2, "stock": stock2})
-                        return render_template("index.html", watchesCart=watchesCart)
-                watchesCart.insert(len(watchesCart), {"id": (len(watchesCart) + 1), 'name': request.form.get("watch2"), "quantity": quantity2, "stock": stock2, "price": 599})
-            return render_template("index.html", watchesCart=watchesCart)
+                        return render_template("index.html", watchesCart=watchesCart, loggedIn=loggedIn)
+                watchesCart.insert(len(watchesCart), {"id": (len(watchesCart) + 1), 'name': request.form.get("watch2"),
+                                                      "quantity": quantity2, "stock": stock2, "price": 599})
+            return render_template("index.html", watchesCart=watchesCart, loggedIn=loggedIn)
         if request.form.get('watch3'):
             quantity3 += 1
             stock3 -= 1
             p = len(watchesCart)
             if p == 0:
-                watchesCart.insert(len(watchesCart), {"id": 1, 'name': request.form.get("watch3"), "quantity": quantity3, "stock": stock3, "price": 599})
+                watchesCart.insert(len(watchesCart),
+                                   {"id": 1, 'name': request.form.get("watch3"), "quantity": quantity3, "stock": stock3,
+                                    "price": 599})
             else:
                 for i in range(len(watchesCart)):
                     if watchesCart[i].get("name") == request.form.get("watch3"):
                         watchesCart[i].update(
                             {'name': request.form.get("watch3"), "quantity": quantity3, "stock": stock3})
-                        return render_template("index.html", watchesCart=watchesCart)
+                        return render_template("index.html", watchesCart=watchesCart, loggedIn=loggedIn)
                 print(len(watchesCart))
-                watchesCart.insert(len(watchesCart), {"id": (len(watchesCart) + 1), 'name': request.form.get("watch3"), "quantity": quantity3, "stock": stock3, "price": 599})
-            return render_template("index.html", watchesCart=watchesCart)
+                watchesCart.insert(len(watchesCart), {"id": (len(watchesCart) + 1), 'name': request.form.get("watch3"),
+                                                      "quantity": quantity3, "stock": stock3, "price": 599})
+            return render_template("index.html", watchesCart=watchesCart, loggedIn=loggedIn)
         if request.form.get('watch4'):
             quantity4 += 1
             stock4 -= 1
             p = len(watchesCart)
             if p == 0:
-                watchesCart.insert(0, {"id": 1, 'name': request.form.get("watch4"), "quantity": quantity4, "stock": stock4, "price": 599})
+                watchesCart.insert(0,
+                                   {"id": 1, 'name': request.form.get("watch4"), "quantity": quantity4, "stock": stock4,
+                                    "price": 599})
             else:
                 for i in range(len(watchesCart)):
                     if watchesCart[i].get("name") == request.form.get("watch4"):
-                        watchesCart[i].update({'name': request.form.get("watch4"), "quantity": quantity4, "stock": stock4})
-                        return render_template("index.html", watchesCart=watchesCart)
-                print(len(watchesCart))
-                watchesCart.insert(len(watchesCart), {"id": (len(watchesCart) + 1), 'name': request.form.get("watch4"), "quantity": quantity4, "stock": stock4, "price": 599})
-            return render_template("index.html", watchesCart=watchesCart)
+                        watchesCart[i].update(
+                            {'name': request.form.get("watch4"), "quantity": quantity4, "stock": stock4})
+                        return render_template("index.html", watchesCart=watchesCart, loggedIn=loggedIn)
+                watchesCart.insert(len(watchesCart), {"id": (len(watchesCart) + 1), 'name': request.form.get("watch4"),
+                                                      "quantity": quantity4, "stock": stock4, "price": 599})
+            return render_template("index.html", watchesCart=watchesCart, loggedIn=loggedIn)
         if request.form.get('signout'):
             flask_login.logout_user()
             loggedIn = False
@@ -175,10 +195,10 @@ def index():
 @app.route('/cart', methods=['POST', 'GET'])
 def cart():
     global page, loggedIn, quantity1, quantity2, quantity3, quantity4, watchesCart, stock1, stock2, stock3, stock4, items
-    page = "checkout"
+    page = "payment"
     items = 0
     for o in range(len(watchesCart)):
-        items += watchesCart[o].get("quantity")*watchesCart[o].get("price")
+        items += watchesCart[o].get("quantity") * watchesCart[o].get("price")
     if request.method == 'POST':
         for x in range(len(watchesCart)):
             if str(watchesCart[x].get("id")) in request.form.keys():
@@ -190,8 +210,8 @@ def cart():
             quantity1 = 0
             stock1 = 4
             for i in range(len(watchesCart)):
-                if watchesCart[(i-1)].get("name") == request.form.get("watch1"):
-                    watchesCart.pop((i-1))
+                if watchesCart[(i - 1)].get("name") == request.form.get("watch1"):
+                    watchesCart.pop((i - 1))
                     return redirect(url_for('cart'))
         if request.form.get('watch2'):
             quantity2 = 0
@@ -205,27 +225,21 @@ def cart():
             stock3 = 4
             for i in range(len(watchesCart)):
                 if watchesCart[i].get("name") == request.form.get("watch3"):
-                    watchesCart.pop((i-1))
+                    watchesCart.pop((i - 1))
                     return redirect(url_for('cart'))
         if request.form.get('watch4'):
             quantity4 = 0
             stock4 = 4
             for i in range(len(watchesCart)):
                 if watchesCart[i].get("name") == request.form.get("watch4"):
-                    watchesCart.pop((i-1))
+                    watchesCart.pop((i - 1))
                     return redirect(url_for('cart'))
     return render_template('cart.html', watchesCart=watchesCart, items=items)
 
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    global quantity1
-    global quantity2
-    global quantity3
-    global quantity4
-    global loggedIn
-    global admin
-    global page
+    global quantity1, quantity2, quantity3, quantity4, loggedIn, admin, page
     form = LoginForm()
     if current_user.is_authenticated:
         loggedIn = True
@@ -271,10 +285,11 @@ def orders():
         return redirect(url_for("login"))
 
 
-@app.route('/checkout', methods=['POST', 'GET'])
+@app.route('/payment', methods=['POST', 'GET'])
 @login_required
-def checkout():
-    return render_template("checkout.html")
+def payment():
+    form = Paying()
+    return render_template("payment.html", form=form)
 
 
 app.run(host='0.0.0.0', port=5000, debug=True)
